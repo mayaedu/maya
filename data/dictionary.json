@@ -1,0 +1,77 @@
+{
+  "articles": [
+    "a",
+    "an",
+    "the"
+  ],
+  "pronouns": [
+    "i",
+    "you",
+    "he",
+    "she",
+    "it",
+    "we",
+    "they",
+    "this",
+    "that"
+  ],
+  "verbs": [
+    "is",
+    "are",
+    "am",
+    "see",
+    "like",
+    "has",
+    "have",
+    "can"
+  ],
+  "actionVerbs": [
+    "run",
+    "jump",
+    "fly",
+    "swim",
+    "walk",
+    "eat",
+    "play",
+    "sleep"
+  ],
+  "adjectives": [
+    "big",
+    "small",
+    "happy",
+    "sad",
+    "fast",
+    "slow",
+    "strong",
+    "funny",
+    "good",
+    "nice",
+    "orange",
+    "yellow",
+    "black",
+    "white",
+    "brown",
+    "pink"
+  ],
+  "blockedSpanishWords": [
+    "de",
+    "el",
+    "la",
+    "los",
+    "las",
+    "un",
+    "una",
+    "es",
+    "son",
+    "grande",
+    "pequeño",
+    "pequeno",
+    "bonito",
+    "bonita",
+    "rápido",
+    "rapido",
+    "lento",
+    "lenta",
+    "animal"
+  ]
+}
