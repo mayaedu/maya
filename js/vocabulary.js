@@ -11,8 +11,7 @@ async function cargarVocabulario() {
     BotState.vocabularioCargado = true;
 
     agregarMensaje(
-      "Vocabulario cargado correctamente.\n\nEscoge una categoría: " +
-      BotState.categoriasDisponibles.join(", ") + ".",
+      "Vocabulario cargado correctamente.\n\n" + obtenerCategoriasNumeradasComoTexto(),
       "bot",
       false
     );
@@ -33,6 +32,18 @@ async function cargarVocabulario() {
 function detectarCategoria(texto) {
   const mensaje = limpiarTexto(texto);
 
+  // Permitir seleccionar categoría por número
+  const numero = parseInt(mensaje);
+
+  if (!isNaN(numero)) {
+    const indice = numero - 1;
+
+    if (BotState.categoriasDisponibles[indice]) {
+      return BotState.categoriasDisponibles[indice];
+    }
+  }
+
+  // Permitir seleccionar categoría por nombre
   for (const categoria of BotState.categoriasDisponibles) {
     const categoriaLimpia = limpiarTexto(categoria);
 
@@ -93,4 +104,18 @@ function obtenerCategoriasComoTexto() {
   }
 
   return BotState.categoriasDisponibles.join(", ");
+}
+
+function obtenerCategoriasNumeradasComoTexto() {
+  if (BotState.categoriasDisponibles.length === 0) {
+    return "No hay categorías disponibles.";
+  }
+
+  let texto = "Selecciona una categoría escribiendo el número:\n\n";
+
+  BotState.categoriasDisponibles.forEach((categoria, index) => {
+    texto += `${index + 1}. ${categoria}\n`;
+  });
+
+  return texto.trim();
 }

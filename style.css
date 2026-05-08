@@ -269,3 +269,14 @@ body {
     font-size: 14px;
   }
 }
+
+
+.message strong {
+  font-weight: 800;
+  color: #1d4ed8;
+}
+
+.question-title strong {
+  font-weight: 800;
+  color: #1d4ed8;
+}

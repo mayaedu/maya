@@ -158,10 +158,10 @@ function procesarMensaje(texto) {
     return;
   }
 
-  agregarMensaje(
-    "No entendí. Puedes escribir una categoría como: " + obtenerCategoriasComoTexto() + ".",
-    "bot"
-  );
+agregarMensaje(
+  "Escoge una categoría válida.\n\n" + obtenerCategoriasNumeradasComoTexto(),
+  "bot"
+);
 }
 
 function manejarCategoria(texto) {
@@ -215,18 +215,18 @@ function salirDePractica() {
   BotState.rondaActual = [];
   BotState.indiceRonda = 0;
 
-  agregarMensaje(
-    "Salimos de la práctica. Escoge una categoría: " + obtenerCategoriasComoTexto() + ".",
-    "bot"
-  );
+agregarMensaje(
+  "Salimos de la práctica.\n\n" + obtenerCategoriasNumeradasComoTexto(),
+  "bot"
+);
 }
 
 function responderSaludo() {
   if (Memoria.estudiante.nombre) {
-    agregarMensaje(
-      `Hola, ${Memoria.estudiante.nombre}. Escoge una categoría: ${obtenerCategoriasComoTexto()}.`,
-      "bot"
-    );
+ agregarMensaje(
+  "Salimos de la práctica.\n\n" + obtenerCategoriasNumeradasComoTexto(),
+  "bot"
+);
   } else {
     agregarMensaje(
       "Hola. Soy tu bot de vocabulario. ¿Cómo te llamas?",

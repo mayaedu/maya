@@ -47,8 +47,8 @@ function mostrarPreguntaActual() {
 }
 
 function mostrarPreguntaNivel1(palabra) {
-  agregarMensajeConImagen(
-    `¿Cómo se dice "${palabra.espanol}" en inglés?`,
+  agregarMensajeConImagenHTML(
+    `¿Cómo se dice <strong>"${escaparHTML(palabra.espanol)}"</strong> en inglés?`,
     palabra.imagen,
     "bot"
   );
@@ -70,7 +70,7 @@ function mostrarPreguntaNivel2(palabra) {
   });
 
   agregarMensajeConOpcionesImagen(
-    `¿Qué significa "${palabra.ingles}"?`,
+    `¿Qué es <strong>${escaparHTML(palabra.ingles)}</strong>?`,
     opcionesBotones,
     "bot"
   );
@@ -92,29 +92,29 @@ function mostrarPreguntaNivel3(palabra) {
 
   const pista = palabra.pista || obtenerPistaPalabra(palabra.ingles);
 
-  agregarMensajeConImagen(
-    `Completa la palabra en inglés:
-
-${completar}
-
-Pista: ${pista}`,
+  agregarMensajeConImagenHTML(
+    `Completa la palabra en inglés:<br><br>
+<strong>${escaparHTML(completar)}</strong><br><br>
+Pista: ${escaparHTML(pista)}`,
     palabra.imagen,
     "bot"
   );
 }
 
 function mostrarPreguntaNivel5(palabra) {
-  agregarMensajeConImagen(
-    `Escribe una oración corta en inglés usando la palabra "${palabra.ingles}".
+  const word = escaparHTML(palabra.ingles);
+  const ejemplo = escaparHTML(
+    palabra.oracionEjemplo || `The ${palabra.ingles} is big.`
+  );
 
-Estructuras permitidas:
-
-1. The ${palabra.ingles} is big.
-2. A ${palabra.ingles} is happy.
-3. I see a ${palabra.ingles}.
-4. The ${palabra.ingles} can run.
-
-Ejemplo: ${palabra.oracionEjemplo || `The ${palabra.ingles} is big.`}`,
+  agregarMensajeConImagenHTML(
+    `Escribe una oración corta en inglés usando la palabra <strong>"${word}"</strong>.<br><br>
+Estructuras permitidas:<br><br>
+1. The <strong>${word}</strong> is big.<br>
+2. A <strong>${word}</strong> is happy.<br>
+3. I see a <strong>${word}</strong>.<br>
+4. The <strong>${word}</strong> can run.<br><br>
+Ejemplo: ${ejemplo}`,
     palabra.imagen,
     "bot"
   );

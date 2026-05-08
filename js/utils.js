@@ -1,5 +1,5 @@
 function limpiarTexto(texto) {
-  return texto
+  return String(texto || "")
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
@@ -8,7 +8,7 @@ function limpiarTexto(texto) {
 }
 
 function extraerNombre(texto) {
-  let nombre = texto
+  let nombre = String(texto || "")
     .replace(/me llamo/gi, "")
     .replace(/mi nombre es/gi, "")
     .replace(/soy/gi, "")
@@ -47,7 +47,9 @@ function obtenerNumeroNivel(texto) {
 }
 
 function capitalizar(texto) {
-  if (!texto || texto.length === 0) return "";
+  texto = String(texto || "");
+
+  if (texto.length === 0) return "";
 
   return texto.charAt(0).toUpperCase() + texto.slice(1);
 }
@@ -61,4 +63,13 @@ function contienePalabra(texto, palabra) {
 
 function numeroAleatorio(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function escaparHTML(texto) {
+  return String(texto || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }

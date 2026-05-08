@@ -31,6 +31,59 @@ function agregarMensajeConImagen(texto, imagen, tipo, guardar = true) {
   hacerScrollAbajo();
 }
 
+function agregarMensajeConImagenHTML(html, imagen, tipo, guardar = true) {
+  const mensaje = document.createElement("div");
+  mensaje.classList.add("message", tipo);
+
+  const contenedorImagen = document.createElement("div");
+  contenedorImagen.classList.add("image-wrapper");
+
+  if (imagen && imagen.trim() !== "") {
+    const img = document.createElement("img");
+    img.src = imagen;
+    img.alt = "Imagen de vocabulario";
+    img.classList.add("chat-image");
+
+    img.onerror = function() {
+      contenedorImagen.innerHTML = "";
+
+      const placeholder = document.createElement("div");
+      placeholder.classList.add("image-placeholder");
+      placeholder.textContent = CONFIG.MENSAJES.IMAGEN_NO_DISPONIBLE;
+
+      contenedorImagen.appendChild(placeholder);
+
+      console.warn("No se encontró la imagen:", imagen);
+    };
+
+    contenedorImagen.appendChild(img);
+
+  } else {
+    const placeholder = document.createElement("div");
+    placeholder.classList.add("image-placeholder");
+    placeholder.textContent = CONFIG.MENSAJES.SIN_IMAGEN;
+
+    contenedorImagen.appendChild(placeholder);
+  }
+
+  const parrafo = document.createElement("p");
+  parrafo.innerHTML = html;
+
+  mensaje.appendChild(contenedorImagen);
+  mensaje.appendChild(parrafo);
+
+  chatBox.appendChild(mensaje);
+
+  if (guardar && typeof guardarMensajeEnHistorial === "function") {
+    guardarMensajeEnHistorial(parrafo.textContent, tipo, {
+      clase: "imagen",
+      imagen: imagen || ""
+    });
+  }
+
+  hacerScrollAbajo();
+}
+
 function agregarMensajeConOpciones(texto, opciones, tipo = "bot", guardar = true) {
   const mensaje = document.createElement("div");
   mensaje.classList.add("message", tipo);
@@ -129,6 +182,7 @@ function crearElementoMensajeConImagen(texto, imagen, tipo) {
     };
 
     contenedorImagen.appendChild(img);
+
   } else {
     const placeholder = document.createElement("div");
     placeholder.classList.add("image-placeholder");
@@ -152,7 +206,7 @@ function crearElementoMensajeConOpcionesImagen(texto, opciones, tipo = "bot", co
 
   const parrafo = document.createElement("p");
   parrafo.classList.add("question-title");
-  parrafo.textContent = texto;
+  parrafo.innerHTML = texto;
   mensaje.appendChild(parrafo);
 
   const contenedorOpciones = document.createElement("div");
@@ -182,6 +236,7 @@ function crearElementoMensajeConOpcionesImagen(texto, opciones, tipo = "bot", co
       };
 
       contenedorImagen.appendChild(img);
+
     } else {
       const placeholder = document.createElement("div");
       placeholder.classList.add("option-image-placeholder");
@@ -223,6 +278,7 @@ function renderizarMensajeHistorial(item, posicion = "final") {
 
   if (item.clase === "imagen") {
     mensaje = crearElementoMensajeConImagen(item.texto, item.imagen, item.tipo);
+
   } else if (item.clase === "opciones_imagen") {
     mensaje = crearElementoMensajeConOpcionesImagen(
       item.texto,
@@ -230,6 +286,7 @@ function renderizarMensajeHistorial(item, posicion = "final") {
       item.tipo,
       false
     );
+
   } else {
     mensaje = crearElementoMensajeTexto(item.texto, item.tipo);
   }
