@@ -1,18 +1,3 @@
-/*
-  levels.js
-
-  Controlador general de niveles.
-
-  Este archivo NO contiene la lógica interna de cada nivel.
-  Solo decide qué nivel mostrar, revisa la respuesta llamando al archivo correcto
-  y maneja funciones comunes como avanzar, terminar ronda y registrar respuestas.
-
-  Archivos que deben cargarse antes:
-  - level1.js
-  - level2.js
-  - level3.js
-  - level5.js
-*/
 
 function iniciarNivel(nivel) {
   BotState.nivelActual = nivel;
@@ -121,6 +106,7 @@ function respuestaIncorrecta(mensaje, respuestaUsuario = "") {
   BotState.ronda.incorrectas++;
 
   registrarIncorrectaNivel(BotState.nivelActual);
+
   guardarError(
     BotState.palabraActual,
     BotState.nivelActual,
