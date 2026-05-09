@@ -32,7 +32,8 @@ async function cargarVocabulario() {
 function detectarCategoria(texto) {
   const mensaje = limpiarTexto(texto);
 
-  // Permitir seleccionar categoría por número
+  // Permite escoger categoría escribiendo el número.
+  // Ejemplo: 1 = animales, 2 = colores, etc.
   const numero = parseInt(mensaje);
 
   if (!isNaN(numero)) {
@@ -43,7 +44,8 @@ function detectarCategoria(texto) {
     }
   }
 
-  // Permitir seleccionar categoría por nombre
+  // Permite escoger categoría escribiendo el nombre.
+  // Ejemplo: animales
   for (const categoria of BotState.categoriasDisponibles) {
     const categoriaLimpia = limpiarTexto(categoria);
 
@@ -61,7 +63,39 @@ function detectarCategoria(texto) {
 function prepararRonda(categoria) {
   const lista = BotState.vocabulario[categoria] || [];
 
-  BotState.rondaActual = mezclarArray(lista);
+  const dificiles = [];
+  const nuevas = [];
+  const normales = [];
+  const dominadas = [];
+
+  lista.forEach(palabra => {
+    const registro = Memoria.estudiante.palabras?.[String(palabra.id)];
+
+    if (!registro) {
+      nuevas.push(palabra);
+      return;
+    }
+
+    if (registro.dominio === "bajo") {
+      dificiles.push(palabra);
+      return;
+    }
+
+    if (registro.dominio === "dominado") {
+      dominadas.push(palabra);
+      return;
+    }
+
+    normales.push(palabra);
+  });
+
+  BotState.rondaActual = [
+    ...mezclarArray(dificiles),
+    ...mezclarArray(nuevas),
+    ...mezclarArray(normales),
+    ...mezclarArray(dominadas)
+  ];
+
   BotState.indiceRonda = 0;
 
   BotState.ronda = {

@@ -2,6 +2,7 @@ cargarMensajesIniciales();
 configurarScrollInfinito();
 cargarVocabulario();
 cargarDictionary();
+actualizarHeader();
 
 sendBtn.addEventListener("click", enviarMensaje);
 
@@ -72,6 +73,41 @@ function procesarMensaje(texto) {
   }
 
   if (
+    mensaje.includes("aprendizaje") ||
+    mensaje.includes("avance")
+  ) {
+    agregarMensaje(obtenerResumenAprendizaje(), "bot");
+    return;
+  }
+
+  if (
+    mensaje.includes("dificiles") ||
+    mensaje.includes("difíciles") ||
+    mensaje.includes("palabras dificiles") ||
+    mensaje.includes("palabras difíciles")
+  ) {
+    agregarMensaje(obtenerTextoPalabrasDificiles(), "bot");
+    return;
+  }
+
+  if (
+    mensaje.includes("dominadas") ||
+    mensaje.includes("palabras dominadas")
+  ) {
+    agregarMensaje(obtenerTextoPalabrasDominadas(), "bot");
+    return;
+  }
+
+  if (
+    mensaje.includes("recomendacion") ||
+    mensaje.includes("recomendación") ||
+    mensaje.includes("recomienda")
+  ) {
+    agregarMensaje(obtenerRecomendacionAprendizaje(), "bot");
+    return;
+  }
+
+  if (
     mensaje.includes("errores") ||
     mensaje.includes("repasar")
   ) {
@@ -84,6 +120,14 @@ function procesarMensaje(texto) {
     mensaje.includes("aprendidas")
   ) {
     agregarMensaje(mostrarPalabrasAprendidas(), "bot");
+    return;
+  }
+
+  if (
+    mensaje.includes("categorias practicadas") ||
+    mensaje.includes("categorías practicadas")
+  ) {
+    agregarMensaje(mostrarCategoriasPracticadas(), "bot");
     return;
   }
 
@@ -116,7 +160,7 @@ function procesarMensaje(texto) {
       guardarMemoria();
 
       agregarMensaje(
-        `Mucho gusto, ${nombre}. Ahora escoge una categoría: ${obtenerCategoriasComoTexto()}.`,
+        `Mucho gusto, ${nombre}.\n\n${obtenerCategoriasNumeradasComoTexto()}`,
         "bot"
       );
       return;
@@ -137,7 +181,7 @@ function procesarMensaje(texto) {
     mensaje.includes("opciones")
   ) {
     agregarMensaje(
-      "Categorías disponibles: " + obtenerCategoriasComoTexto() + ".",
+      obtenerCategoriasNumeradasComoTexto(),
       "bot"
     );
     return;
@@ -158,10 +202,10 @@ function procesarMensaje(texto) {
     return;
   }
 
-agregarMensaje(
-  "Escoge una categoría válida.\n\n" + obtenerCategoriasNumeradasComoTexto(),
-  "bot"
-);
+  agregarMensaje(
+    "No entendí.\n\n" + obtenerCategoriasNumeradasComoTexto(),
+    "bot"
+  );
 }
 
 function manejarCategoria(texto) {
@@ -169,7 +213,7 @@ function manejarCategoria(texto) {
 
   if (!categoria) {
     agregarMensaje(
-      "Escoge una categoría válida: " + obtenerCategoriasComoTexto() + ".",
+      "Escoge una categoría válida.\n\n" + obtenerCategoriasNumeradasComoTexto(),
       "bot"
     );
     return;
@@ -177,6 +221,8 @@ function manejarCategoria(texto) {
 
   BotState.categoriaActual = categoria;
   BotState.estado = CONFIG.ESTADOS.ESPERANDO_NIVEL;
+
+  actualizarHeader();
 
   agregarMensaje(
     `Muy bien. Escogiste ${categoria}.
@@ -215,21 +261,23 @@ function salirDePractica() {
   BotState.rondaActual = [];
   BotState.indiceRonda = 0;
 
-agregarMensaje(
-  "Salimos de la práctica.\n\n" + obtenerCategoriasNumeradasComoTexto(),
-  "bot"
-);
+  actualizarHeader();
+
+  agregarMensaje(
+    "Salimos de la práctica.\n\n" + obtenerCategoriasNumeradasComoTexto(),
+    "bot"
+  );
 }
 
 function responderSaludo() {
   if (Memoria.estudiante.nombre) {
- agregarMensaje(
-  "Salimos de la práctica.\n\n" + obtenerCategoriasNumeradasComoTexto(),
-  "bot"
-);
+    agregarMensaje(
+      `Hola, ${Memoria.estudiante.nombre}.\n\n${obtenerCategoriasNumeradasComoTexto()}`,
+      "bot"
+    );
   } else {
     agregarMensaje(
-      "Hola. Soy tu bot de vocabulario. ¿Cómo te llamas?",
+      "Hola. Soy tu bot de vocabulario.\n\n" + obtenerCategoriasNumeradasComoTexto(),
       "bot"
     );
   }

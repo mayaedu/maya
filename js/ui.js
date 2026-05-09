@@ -357,6 +357,34 @@ function cargarMensajesAnterioresEnChat() {
   }, 300);
 }
 
+function actualizarHeader() {
+  const levelBadge = document.getElementById("levelBadge");
+  const headerSubtitle = document.getElementById("headerSubtitle");
+
+  if (!levelBadge || !headerSubtitle) return;
+
+  if (BotState.estado === CONFIG.ESTADOS.PRACTICANDO && BotState.nivelActual) {
+    levelBadge.textContent = "Nivel " + BotState.nivelActual;
+
+    if (BotState.categoriaActual) {
+      headerSubtitle.textContent = "Categoría: " + capitalizar(BotState.categoriaActual);
+    } else {
+      headerSubtitle.textContent = "Practicando vocabulario";
+    }
+
+    return;
+  }
+
+  if (BotState.estado === CONFIG.ESTADOS.ESPERANDO_NIVEL && BotState.categoriaActual) {
+    levelBadge.textContent = "Elige nivel";
+    headerSubtitle.textContent = "Categoría: " + capitalizar(BotState.categoriaActual);
+    return;
+  }
+
+  levelBadge.textContent = "Sin nivel";
+  headerSubtitle.textContent = "Aprende inglés con imágenes";
+}
+
 function limpiarInput() {
   userInput.value = "";
 }

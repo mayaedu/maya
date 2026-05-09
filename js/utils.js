@@ -73,3 +73,40 @@ function escaparHTML(texto) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
+
+function crearPalabraIncompleta(palabra) {
+  palabra = String(palabra || "");
+
+  if (palabra.length <= 2) {
+    return {
+      incompleta: palabra,
+      respuesta: ""
+    };
+  }
+
+  const letras = palabra.split("");
+
+  let posicion = 1;
+
+  if (palabra.length > 3) {
+    posicion = Math.floor(palabra.length / 2);
+  }
+
+  const letraOculta = letras[posicion];
+  letras[posicion] = "_";
+
+  return {
+    incompleta: letras.join(""),
+    respuesta: letraOculta
+  };
+}
+
+function obtenerPistaPalabra(palabra) {
+  palabra = String(palabra || "");
+
+  if (palabra.length === 0) {
+    return "Piensa en la palabra correcta.";
+  }
+
+  return `Empieza con "${palabra.charAt(0)}" y tiene ${palabra.length} letras.`;
+}
