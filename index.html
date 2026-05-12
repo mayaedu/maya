@@ -4,90 +4,67 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Arrow Escape</title>
+  <title>Bot de Vocabulario Primaria</title>
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <main class="game">
+  <div class="app-container">
 
-   
-<!-- PANTALLA DE INICIO -->
-<section id="startScreen" class="screen start-screen">
-  <div class="start-card">
-    <h1>Galaxy Escape</h1>
-    <p>Lanza las naves en el orden correcto y libera la galaxia.</p>
+    <!-- Encabezado -->
+    <div class="chat-header">
+      <div class="bot-avatar">🤖</div>
 
-    <button id="playBtn" type="button">Iniciar misión</button>
-    <button id="levelsBtn" type="button">Seleccionar misión</button>
-    <button id="resetProgressBtn" type="button" class="danger-btn">Reiniciar progreso</button>
+      <div class="header-info">
+        <h2>Maya</h2>
+        <p id="headerSubtitle">Aprende inglés con imágenes</p>
+      </div>
 
-    <div class="start-info">
-      <p>Mejor energía: <span id="bestScoreText">0</span></p>
-      <p>Misión desbloqueada: <span id="unlockedText">1</span></p>
+      <div class="level-badge" id="levelBadge">
+        Sin nivel
+      </div>
     </div>
+
+    <!-- Caja del chat -->
+    <div class="chat-box" id="chatBox"></div>
+
+    <!-- Entrada de mensaje -->
+    <div class="chat-input-area">
+      <input
+        type="text"
+        id="userInput"
+        placeholder="Escribe tu respuesta..."
+        autocomplete="off"
+      />
+
+      <button id="sendBtn">
+        Enviar
+      </button>
+    </div>
+
   </div>
-</section>
 
-    <!-- SELECTOR DE NIVELES -->
-    <section id="levelScreen" class="screen level-screen hidden">
-      <div class="level-header">
-        <button id="backFromLevelsBtn" type="button">←</button>
-        <h2>Seleccionar nivel</h2>
-      </div>
+ <script src="js/config.js"></script>
+<script src="js/state.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/chat-history.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/vocabulary.js"></script>
+<script src="js/dictionary.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/learning.js"></script>
 
-      <div id="levelGrid" class="level-grid"></div>
-    </section>
+<script src="js/level1.js"></script>
+<script src="js/level2.js"></script>
+<script src="js/level3.js"></script>
+<script src="js/level5.js"></script>
 
-    <!-- PANTALLA DEL JUEGO -->
-    <section id="gameScreen" class="screen game-screen hidden">
+<script src="js/levels.js"></script>
+<script src="js/math-geometry.js"></script>
+<script src="js/app.js"></script>
+<script src="js/app.js"></script>
 
-     <!-- Panel superior -->
-<section class="top-panel">
-  <div class="badge">MISSION <span id="levelText">1</span></div>
-  <div class="score">ENERGY: <span id="scoreText">0</span></div>
-  <div class="difficulty">ZONE: <span id="difficultyText">Fácil</span></div>
-  <div class="timer">⏱ <span id="timerText">00:00</span></div>
-   <div class="meteor">☄️ <span id="meteorText">SAFE</span></div>
-</section>
-
-      <!-- Tablero -->
-      <section class="board-wrapper">
-        <div id="board" class="board"></div>
-      </section>
-
-      <!-- Panel inferior -->
- <!-- Panel inferior -->
-<section class="bottom-panel">
-  <div class="moves">LAUNCHES: <span id="movesText">0</span></div>
-  <button id="hintBtn" type="button">SCAN</button>
-  <button id="soundBtn" type="button">🔊</button>
-  <button id="restartBtn" type="button">↻</button>
-  <button id="homeBtn" type="button">BASE</button>
-</section>
-
-    </section>
-
-    <!-- MENSAJE DE NIVEL COMPLETADO -->
-    <div id="message" class="message hidden">
-      <div class="message-box">
-        <h2 id="messageTitle">Nivel completado</h2>
-        <p id="messageText">Muy bien.</p>
-
-      <div class="modal-actions">
-  <button id="nextBtn" type="button">Siguiente misión</button>
-  <button id="goLevelsBtn" type="button">Misiones</button>
-</div>
-      </div>
-    </div>
-
-  </main>
-
-  <script src="level-generator.js"></script>
-  <script src="sounds.js"></script>
-  <script src="meteoros.js"></script>
-  <script src="main.js"></script>
-  
 </body>
 </html>
