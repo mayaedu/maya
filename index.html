@@ -1,70 +1,89 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
 
-  <title>Bot de Vocabulario Primaria</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="style.css" />
+  <title>Conecta 4 Online</title>
+
+  <!-- ESTILOS -->
+  <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
 
-  <div class="app-container">
+  <main class="app">
 
-    <!-- Encabezado -->
-    <div class="chat-header">
-      <div class="bot-avatar">🤖</div>
+    <h1>🎮 Conecta 4 Online</h1>
 
-      <div class="header-info">
-        <h2>Maya</h2>
-        <p id="headerSubtitle">Aprende inglés con imágenes</p>
+    <!-- MENÚ PRINCIPAL -->
+    <section id="mainMenu" class="menu-card">
+
+      <div class="menu-title">Elige un modo</div>
+
+      <div class="menu-subtitle">
+        Juega solo, busca rival o mira el ranking
       </div>
 
-      <div class="level-badge" id="levelBadge">
-        Sin nivel
-      </div>
-    </div>
-
-    <!-- Caja del chat -->
-    <div class="chat-box" id="chatBox"></div>
-
-    <!-- Entrada de mensaje -->
-    <div class="chat-input-area">
-      <input
-        type="text"
-        id="userInput"
-        placeholder="Escribe tu respuesta..."
-        autocomplete="off"
-      />
-
-      <button id="sendBtn">
-        Enviar
+      <button class="menu-btn btn-solo" onclick="startSoloGame()">
+        🎮 Jugar Solo
       </button>
-    </div>
 
-  </div>
+      <button class="menu-btn btn-online" onclick="startOnlineGame()">
+        🌐 Buscar Salas
+      </button>
 
- <script src="js/config.js"></script>
-<script src="js/state.js"></script>
-<script src="js/utils.js"></script>
-<script src="js/storage.js"></script>
-<script src="js/chat-history.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/vocabulary.js"></script>
-<script src="js/dictionary.js"></script>
-<script src="js/progress.js"></script>
-<script src="js/learning.js"></script>
+      <button class="menu-btn btn-ranking" onclick="showRanking()">
+        🏆 Ranking
+      </button>
 
-<script src="js/level1.js"></script>
-<script src="js/level2.js"></script>
-<script src="js/level3.js"></script>
-<script src="js/level5.js"></script>
+    </section>
 
-<script src="js/levels.js"></script>
-<script src="js/math-geometry.js"></script>
-<script src="js/app.js"></script>
-<script src="js/app.js"></script>
+    <!-- ÁREA DEL JUEGO -->
+    <section id="gameArea" class="game-area">
+
+      <div id="onlineInfo" class="online-info">
+        Modo no iniciado
+      </div>
+
+      <p id="status" class="status">
+        Esperando...
+      </p>
+
+      <div id="board"></div>
+
+      <div class="actions">
+        <button class="action-btn reset-btn" onclick="resetGame()">
+          🔄 Reiniciar
+        </button>
+
+        <button class="action-btn back-btn" onclick="backToMenu()">
+          ⬅ Volver al menú
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ÁREA DEL RANKING -->
+    <section id="rankingArea" class="ranking-area">
+
+      <h2>🏆 Ranking</h2>
+
+      <div id="rankingList" class="ranking-list">
+        Cargando ranking...
+      </div>
+
+      <button class="action-btn back-btn" onclick="backToMenu()">
+        ⬅ Volver al menú
+      </button>
+
+    </section>
+
+  </main>
+
+  <!-- JS PRINCIPAL -->
+  <script type="module" src="js/main.js"></script>
 
 </body>
 </html>
