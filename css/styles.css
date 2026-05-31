@@ -1,0 +1,443 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.app {
+  width: 100%;
+}
+
+h1 {
+  margin-bottom: 10px;
+  font-size: 32px;
+}
+
+/* =========================
+   MENÚ PRINCIPAL
+========================= */
+
+.menu-card {
+  max-width: 380px;
+  margin: 40px auto 20px;
+  padding: 26px;
+  background: rgba(2, 6, 23, 0.88);
+  border-radius: 24px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.55);
+}
+
+.menu-title {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.menu-subtitle {
+  font-size: 14px;
+  color: #cbd5e1;
+  margin-bottom: 22px;
+  line-height: 1.4;
+}
+
+
+/* =========================
+   JUGADOR LOCAL
+========================= */
+
+.player-setup {
+  margin: 18px 0;
+  padding: 14px;
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.player-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #cbd5e1;
+  font-weight: bold;
+}
+
+.player-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: none;
+  border-radius: 12px;
+  outline: none;
+  font-size: 15px;
+  text-align: center;
+  background: #f8fafc;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+.player-save-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #06b6d4, #0284c7);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.player-info {
+  margin: 12px 0 18px;
+  font-size: 14px;
+  color: #86efac;
+  font-weight: bold;
+} 
+.menu-btn {
+  display: block;
+  width: 100%;
+  margin: 12px 0;
+  padding: 15px 18px;
+  border: none;
+  border-radius: 16px;
+  font-size: 17px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.menu-btn:hover {
+  transform: scale(1.04);
+  filter: brightness(1.1);
+}
+
+.btn-solo {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+.btn-online {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.btn-ranking {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+/* =========================
+   ÁREAS
+========================= */
+
+.game-area {
+  display: none;
+}
+
+.ranking-area {
+  display: none;
+  max-width: 440px;
+  margin: 25px auto;
+  padding: 22px;
+  background: rgba(2, 6, 23, 0.88);
+  border-radius: 22px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+}
+
+.online-info {
+  font-size: 14px;
+  color: #cbd5e1;
+  margin-bottom: 8px;
+}
+
+.status {
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* =========================
+   TABLERO
+========================= */
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(7, 70px);
+  gap: 8px;
+  justify-content: center;
+  margin: 20px auto;
+  padding: 15px;
+  background: #020617;
+  border-radius: 22px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  position: relative;
+  width: max-content;
+}
+
+.cell {
+  width: 70px;
+  height: 70px;
+  background: radial-gradient(circle at 30% 30%, #475569, #1e293b);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cell:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(255,255,255,0.15);
+}
+
+.player1 {
+  background: radial-gradient(circle at 30% 30%, #ff4d4d, #b91c1c);
+  box-shadow: 0 0 12px rgba(255,0,0,0.5);
+}
+
+.player2 {
+  background: radial-gradient(circle at 30% 30%, #fde047, #ca8a04);
+  box-shadow: 0 0 12px rgba(255,255,0,0.5);
+}
+
+/* =========================
+   FICHA QUE CAE
+========================= */
+
+.falling-piece {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  z-index: 10;
+  pointer-events: none;
+  transition: top 0.45s cubic-bezier(.34,1.56,.64,1);
+}
+
+.falling-player1 {
+  background: radial-gradient(circle at 30% 30%, #ff4d4d, #b91c1c);
+}
+
+.falling-player2 {
+  background: radial-gradient(circle at 30% 30%, #fde047, #ca8a04);
+}
+
+/* =========================
+   BOTONES DE ACCIÓN
+========================= */
+
+.actions {
+  margin-top: 10px;
+}
+
+.action-btn {
+  margin: 6px;
+  padding: 11px 18px;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.action-btn:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.reset-btn {
+  background: #22c55e;
+}
+
+.back-btn {
+  background: #334155;
+}
+
+/* =========================
+   RANKING
+========================= */
+
+.ranking-list {
+  margin: 15px 0;
+}
+
+.ranking-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 12px;
+  margin: 8px 0;
+  background: #1e293b;
+  border-radius: 12px;
+  font-size: 15px;
+}
+
+.ranking-item span:first-child {
+  font-weight: bold;
+}
+
+.ranking-item span:last-child {
+  color: #facc15;
+  font-weight: bold;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+  body {
+    padding: 14px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  .menu-card {
+    margin-top: 25px;
+    padding: 22px;
+  }
+
+  #board {
+    grid-template-columns: repeat(7, 48px);
+    gap: 6px;
+    padding: 10px;
+  }
+
+  .cell,
+  .falling-piece {
+    width: 48px;
+    height: 48px;
+  }
+
+  .action-btn {
+    width: 90%;
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 390px) {
+  #board {
+    grid-template-columns: repeat(7, 42px);
+    gap: 5px;
+    padding: 8px;
+  }
+
+  .cell,
+  .falling-piece {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+
+/* =========================
+   MODAL DE JUGADOR
+========================= */
+
+.player-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.78);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 9999;
+  backdrop-filter: blur(6px);
+}
+
+.player-modal.show {
+  display: flex;
+}
+
+.player-modal-card {
+  width: 100%;
+  max-width: 360px;
+  padding: 26px;
+  background: #020617;
+  border-radius: 24px;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.65);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  text-align: center;
+}
+
+.player-modal-card h2 {
+  margin: 0 0 8px;
+  font-size: 25px;
+}
+
+.player-modal-card p {
+  margin: 0 0 18px;
+  color: #cbd5e1;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.player-input {
+  width: 100%;
+  padding: 13px 14px;
+  border: none;
+  border-radius: 14px;
+  outline: none;
+  font-size: 16px;
+  text-align: center;
+  background: #f8fafc;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+.player-modal-error {
+  min-height: 20px;
+  margin-bottom: 10px;
+  color: #facc15;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.player-save-btn {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #06b6d4, #0284c7);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.player-info {
+  margin: 12px 0 18px;
+  padding: 10px;
+  background: rgba(15, 23, 42, 0.75);
+  border-radius: 14px;
+  color: #86efac;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.player-info small {
+  display: block;
+  color: #cbd5e1;
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.change-player-btn {
+  display: block;
+  margin: 8px auto 0;
+  padding: 7px 12px;
+  border: none;
+  border-radius: 10px;
+  background: #334155;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Conecta 4 Online</title>
+
+  <!-- ESTILOS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <!-- MODAL DE JUGADOR -->
+  <div id="playerModal" class="player-modal" aria-hidden="true">
+
+    <div class="player-modal-card">
+
+      <h2>👤 Crea tu jugador</h2>
+
+      <p>
+        Escribe tu nombre para comenzar. Se guardará en este dispositivo.
+      </p>
+
+      <input
+        id="playerNameInput"
+        class="player-input"
+        type="text"
+        placeholder="Ejemplo: Francisco"
+        maxlength="18"
+        autocomplete="off"
+      >
+
+      <div id="playerModalError" class="player-modal-error"></div>
+
+      <button class="player-save-btn" onclick="savePlayerName()">
+        Guardar y jugar
+      </button>
+
+    </div>
+
+  </div>
+
+  <main class="app">
+
+    <h1>🎮 Conecta 4 Online</h1>
+
+    <!-- MENÚ PRINCIPAL -->
+    <section id="mainMenu" class="menu-card">
+
+      <div class="menu-title">Elige un modo</div>
+
+      <div class="menu-subtitle">
+        Juega solo, busca rival o mira el ranking
+      </div>
+
+      <div id="playerInfo" class="player-info"></div>
+
+      <button class="menu-btn btn-solo" onclick="startSoloGame()">
+        🎮 Jugar Solo
+      </button>
+
+      <button class="menu-btn btn-online" onclick="startOnlineGame()">
+        🌐 Buscar Salas
+      </button>
+
+      <button class="menu-btn btn-ranking" onclick="showRanking()">
+        🏆 Ranking
+      </button>
+
+    </section>
+
+    <!-- ÁREA DEL JUEGO -->
+    <section id="gameArea" class="game-area">
+
+      <div id="onlineInfo" class="online-info">
+        Modo no iniciado
+      </div>
+
+      <p id="status" class="status">
+        Esperando...
+      </p>
+
+      <div id="board"></div>
+
+      <div class="actions">
+        <button class="action-btn reset-btn" onclick="resetGame()">
+          🔄 Reiniciar
+        </button>
+
+        <button class="action-btn back-btn" onclick="backToMenu()">
+          ⬅ Volver al menú
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ÁREA DEL RANKING -->
+    <section id="rankingArea" class="ranking-area">
+
+      <h2>🏆 Ranking</h2>
+
+      <div id="rankingList" class="ranking-list">
+        Cargando ranking...
+      </div>
+
+      <button class="action-btn back-btn" onclick="backToMenu()">
+        ⬅ Volver al menú
+      </button>
+
+    </section>
+
+  </main>
+
+  <!-- JS PRINCIPAL -->
+  <script type="module" src="js/main.js"></script>
+
+</body>
+</html>
